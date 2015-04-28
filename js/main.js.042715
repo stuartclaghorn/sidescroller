@@ -62,45 +62,16 @@ SideScroller.Game.prototype = {
   },
  
   create: function() {
-	this.map = this.game.add.tilemap('level1');
-
-	// the first parameter is the tileset name as specified in Tiled
-	this.map.addTilesetImage('tiles_spritesheet', 'gameTiles');
-
-	// create layers
-	this.backgroundLayer = this.map.createLayer('backgroundLayer');
-	this.blockedLayer = this.map.createLayer('blockedLayer');
-
-	// collision on blockedLayer
-	this.map.setCollisionBetween(1, 100000, true, 'blockedLayer');
-
-	// resizes the game world to match the layer dimensions
-	this.backgroundLayer.resizeWorld();
-
     //create player
     this.player = this.game.add.sprite(100, 300, 'player');
-
-	// enable physics on the player
-	this.game.physics.arcade.enable(this.player);
-
-	// player gravity
-	this.player.body.gravity.y = 1000;
-
-	// the camera will follow the player in the world
-	this.game.camera.follow(this.player);
-	
   }, 
  
   update: function() {
-	  // collision
-	  this.game.physics.arcade.collide(this.player, this.blockedLayer, this.playerHit,null, this);
   },
  
   render: function() {
     this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");  
   }
-
-  playerHit: function(player, blockedLayer) {}
 };
 
 SideScroller.game = new Phaser.Game(746, 420, Phaser.AUTO, '');
